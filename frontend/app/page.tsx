@@ -255,9 +255,9 @@ function SelfAuther() {
       {/* --- Navigation Bar --- */}
       <nav className="w-full bg-white shadow-sm border-b border-gray-200 py-3 px-6 flex items-center justify-between sticky top-0 z-10">
         {/* Left logo */}
-        <div className="flex items-center">
-          <img src="/self.svg" alt="Self Logo" className="h-8 mr-3" />
-          <span className="text-lg font-semibold text-indigo-700 hidden sm:inline">Buy4Me</span>
+        <div className="bg-black rounded-full px-4 py-2 inline-flex items-center justify-center space-x-3">
+          <img src="/icon.png" alt="App Icon" className="h-8 w-8" />
+          <span className="text-lg font-semibold text-white hidden sm:inline">Buy4Me</span>
         </div>
 
         {/* Right links */}

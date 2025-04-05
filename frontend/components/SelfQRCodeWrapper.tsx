@@ -5,14 +5,14 @@ import SelfQRcodeWrapper, { SelfAppBuilder } from '@selfxyz/qrcode';
 import { v4 as uuidv4 } from 'uuid';
 
 function VerificationPage() {
-  const [userId, setUserId] = useState(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     // Generate a user ID when the component mounts
-    setUserId(uuidv4());
+    setUserId(true);
   }, []);
 
-  if (!userId) return null;
+  if (!isClient) return null;
 
   const selfApp = new SelfAppBuilder({
     appName: "Self Birthday",
@@ -33,7 +33,6 @@ function VerificationPage() {
     <div className="verification-container">
       <h1>Verify Your Identity</h1>
       <p>Scan this QR code with the Self app to verify your identity</p>
-      
       <SelfQRcodeWrapper
         selfApp={selfApp}
         onSuccess={() => {
@@ -43,7 +42,6 @@ function VerificationPage() {
         }}
         size={350}
       />
-      
       <p className="text-sm text-gray-500">
         User ID: {userId.substring(0, 8)}...
       </p>

@@ -20,18 +20,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             // Contract details
             const contractAddress = "0x1a634743e3Ea7DDE8d31BB6C2CA15987E80079E0";
-
-            // Uncomment this to use the Self backend verifier for offchain verification instead
-            // const selfdVerifier = new SelfBackendVerifier(
-            //     'https://forno.celo.org',
-            //     "Self-Denver-Birthday",
-            //     "your ngrok endpoint",
-            //     "hex",
-            // //  true // If you want to use mock passport
-            // );
-            // const result = await selfdVerifier.verify(proof, publicSignals);
-            // console.log("Verification result:", result);
-
             const address = await getUserIdentifier(publicSignals, "hex");
             console.log("Extracted address from verification result:", address);
 
@@ -41,9 +29,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const contract = new ethers.Contract(contractAddress, abi, signer);
 
             const gasPrice = ethers.parseUnits('30', 'gwei');
-            console.log("SCOPE:", publicSignals[7]);
-            console.log("ATTESTATION_ID:", publicSignals[10]);
-            console.log("NULLIFIER:", publicSignals[17]);
+            let gasLimit;
+            try {
+                const estimatedGas = await contract.estimateGas.verifySelfProof(proof);
+                gasLimit = estimatedGas * 120n / 100n;
+            } catch (err) {
+                console.warn("⚠️ gas estimate failed, use default value");
+                gasLimit = 1_000_000n;
+            }
 
             try {
                 console.log("sucess try to send!");
@@ -59,7 +52,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     },
                     {
                         gasPrice,
-                        gasLimit: 1000000
+                        gasLimit
                     }
                 );
                 await tx.wait();

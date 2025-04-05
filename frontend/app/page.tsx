@@ -5,7 +5,7 @@ import SelfQRcodeWrapper, { SelfApp, SelfAppBuilder } from '@selfxyz/qrcode';
 import { logo } from './content/birthdayAppLogo';
 import { ethers } from 'ethers';
 
-function Birthday() {
+function SelfAuther() {
     const [input, setInput] = useState('0xE6E4b6a802F2e0aeE5676f6010e0AF5C9CDd0a50');
     const [address, setAddress] = useState(input);
 
@@ -64,6 +64,7 @@ function Birthday() {
     };
 
     return (
+        // TODO: change graph
         <div className="min-h-screen bg-white text-black">
             <nav className="w-full bg-white border-b border-gray-200 py-3 px-6 flex items-center justify-between">
                 <div className="flex items-center">
@@ -77,7 +78,7 @@ function Birthday() {
                 </div>
                 <div className="flex items-center space-x-4">
                     <a 
-                        href="https://github.com/zk-passport/openpassport" 
+                        href="https://github.com/seanhuang1228/buy4me" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="bg-gray-900 text-white px-4 py-2 rounded-md flex items-center hover:bg-gray-800 transition-colors"
@@ -89,11 +90,11 @@ function Birthday() {
                     </a>
                     <a
                         className="flex items-center justify-center gap-2 hover:underline hover:underline-offset-4"
-                        href="https://self.xyz"
+                        href="https://github.com/seanhuang1228/buy4me"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        Go to self.xyz →
+                        Go to our github →
                     </a>
                 </div>
             </nav>
@@ -101,7 +102,7 @@ function Birthday() {
             <div className="container mx-auto max-w-2xl px-4 py-8">
                 <div className="bg-white rounded-lg shadow-md p-6 border border-gray-300">
                     <h2 className="text-2xl font-semibold mb-6 text-center">
-                        🎉 It&apos;s your birthday? Claim 100 USDC 🎂 🎁
+                        Let&apos;s Auth!
                     </h2>
 
                     <div className="mb-6">
@@ -137,4 +138,4 @@ function Birthday() {
     );
 }
 
-export default Birthday;
+export default SelfAuther;

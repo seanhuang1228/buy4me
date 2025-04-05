@@ -12,8 +12,8 @@ One example use case is ticket purchasing. When a user wants to buy tickets, the
 Once validated, the buyer pays for the tickets, and the contract automatically distributes each ticket to the corresponding delegator—ensuring fairness, flexibility, and on-chain accountability.
 
 Our contract address on CELO mainnet:
-- SelfNFTMinter: `0xDE6C2e93cc36Ad778fa370DF72035283114438f2`
 - SelfNFT: `0x41b3d4De71ba2E3b33F080271690b1C7d453Bc14`
+- SelfNFTMinter: `0xDE6C2e93cc36Ad778fa370DF72035283114438f2`
 - TicketBuyer: `0xFbe3670061C5BEB24caC80517dE85fe56394986d`
 
 ## Setup Instructions

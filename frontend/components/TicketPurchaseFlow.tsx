@@ -78,23 +78,33 @@ export default function TicketPurchaseSection({ passAddress, ticketAddress, tick
   const handleAddId = async () => {
     if (!account) return
     try {
-      const addr = tokenIdInput
+      const addr = tokenIdInput.trim()
 
       const provider = new ethers.JsonRpcProvider("https://alfajores-forno.celo-testnet.org");
       const contract = new ethers.Contract(passAddress, passAbi, provider)
       const canAct = await contract.canActOnBehalf(addr, account)
       const id = await contract.address2id(addr)
 
-      if (canAct) {
-        setDelegateIds([...delegateIds, id])
+      if (!canAct) {
+        alert(`You are not authorized to act on behalf of: ${addr}`)
         setTokenIdInput('')
-      } else {
-        alert('cannot act on the owner of id: ', value)
-        setTokenIdInput('')
+        return
       }
-    } catch(err: any) {
+
+      const idStr = id.toString()
+      const alreadyAdded = delegateIds.some(existingId => existingId.toString() === idStr)
+
+      if (alreadyAdded) {
+        alert(`This ID (${idStr}) has already been added.`)
+      } else {
+        setDelegateIds([...delegateIds, id])
+      }
+
+      setTokenIdInput('')
+    } catch (err: any) {
       console.error(err)
-      alert('Please input a valid address which you are delegated')
+      alert('Please input a valid address that delegated authority to you.')
+      setTokenIdInput('')
     }
   }
 
@@ -157,7 +167,7 @@ export default function TicketPurchaseSection({ passAddress, ticketAddress, tick
 
               <div className="text-sm text-gray-700 mt-4">
                 🧾 Total Tickets: <b>{delegateIds.length}</b><br />
-                💰 Total Price (CELO): <b>{(ticketPriceEth * delegateIds.length).toFixed(2)}</b>
+                💰 Total Price (wgei): <b>{(ticketPriceEth * delegateIds.length).toFixed(2)}</b>
               </div>
 
               <button

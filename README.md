@@ -70,4 +70,34 @@ Once validated, the buyer pays for the tickets, and the contract automatically d
    yarn run deploy:Ticket
    ```
 
-   
+### Deploying the Web Service
+
+1. Navigate to the `frontend` directory:
+
+   ```
+   cd frontend
+   ```
+
+2. Install dependencies:
+
+   ```
+   yarn install
+   ```
+
+3. Run in dev mode:
+
+   ```
+   yarn dev
+   ```
+
+4. Configure environment variables:
+
+   - Copy `.env.example` to `.env`
+   - Fill in the required values in the `.env` file
+
+5. Replace the contract address in lib:
+   - open `lib/address.ts`
+   - replace `MINTER_CONTRACT_ADDRESS` with `SelfNFTMinter` address
+   - replace `TICKET_CONTRACT_ADDRESS` with `TicketSeller` address
+   - replace `NFT_CONTRACT_ADDRESS` with `SelfNFT` address
+

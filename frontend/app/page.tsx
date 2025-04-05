@@ -8,6 +8,7 @@ import TicketPurchaseFlow from '@/components/TicketPurchaseFlow'
 
 // --- Contract Details (Replace with your actual details) ---
 const CONTRACT_ADDRESS = '0xd5CAE924a7EeE4d4A7902F7610Ff5acb4533AA9b'; // <-- PASTE YOUR CONTRACT ADDRESS HERE
+const TICKET_ADDRESS = '0x35829336286e25b2CB272C1c708Fb7F1032f9702';
 const CONTRACT_ABI = [
   'function toggleDelegate(address delegate)',
   'function canActOnBehalf(address owner, address actor) view returns (bool)',
@@ -125,15 +126,13 @@ const Interface3 = () => {
   return (
     <>
       <h2 className="text-2xl font-semibold mb-6 text-center">
-        Third Interface (View 3)
+        Buy Tickets
       </h2>
-      <div className="p-4 border border-dashed border-blue-400 rounded text-center">
-        <p className="text-lg mb-2">Content for the Third View</p>
-        <ul className="list-disc list-inside text-left inline-block">
-          <li>Another distinct view</li>
-          <li>Could contain settings, info, etc.</li>
-        </ul>
-      </div>
+      <TicketPurchaseFlow
+        passAddress={CONTRACT_ADDRESS}
+        ticketAddress={TICKET_ADDRESS}
+        ticketPriceEth={10}
+      />
     </>
   );
 };

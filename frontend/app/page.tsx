@@ -5,10 +5,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 // Make sure ethers is imported and available
 import { ethers } from 'ethers';
 import TicketPurchaseFlow from '@/components/TicketPurchaseFlow'
+import {TICKET_CONTRACT_ADDRESS, NFT_CONTRACT_ADDRESS} from "@/lib/address.ts"
 
 // --- Contract Details (Replace with your actual details) ---
-const CONTRACT_ADDRESS = '0x6d46cBfd116B98e62e86D07b644D310AE082Dd12'; // <-- PASTE YOUR CONTRACT ADDRESS HERE
-const TICKET_ADDRESS = '0x2838e29d085D1b425747Ee212277C9CAc5a043e3';
+// const CONTRACT_ADDRESS = '0xBa76A165938EF0AfCc7EC7Fef8BF5B86c29d064C'; // <-- PASTE YOUR CONTRACT ADDRESS HERE
+// const TICKET_ADDRESS = '0x6A0a26627D5493B972DC983ECA61C018ec0354d9';
 const CONTRACT_ABI = [
   'function toggleDelegate(address delegate)',
   'function canActOnBehalf(address owner, address actor) view returns (bool)',
@@ -69,7 +70,7 @@ const Interface2 = () => {
       console.log("hello")
       const provider = new ethers.BrowserProvider(window.ethereum)
       const signer = await provider.getSigner()
-      const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer)
+      const contract = new ethers.Contract(NFT_CONTRACT_ADDRESS, CONTRACT_ABI, signer)
       await contract.toggleDelegate(queryAddr)
       setQueryAddr("")
   }
@@ -86,7 +87,7 @@ const Interface2 = () => {
 
     const checkStatus = async () => {
       const provider = new ethers.BrowserProvider(window.ethereum)
-      const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider)
+      const contract = new ethers.Contract(NFT_CONTRACT_ADDRESS, CONTRACT_ABI, provider)
       const canActOn = await contract.canActOnBehalf(userAddress, queryAddr)
 
       setIsDelegated(canActOn)
@@ -155,8 +156,8 @@ const Interface3 = () => {
       </h2>
 
       <TicketPurchaseFlow
-        passAddress={CONTRACT_ADDRESS}
-        ticketAddress={TICKET_ADDRESS}
+        passAddress={NFT_CONTRACT_ADDRESS}
+        ticketAddress={TICKET_CONTRACT_ADDRESS}
         ticketPriceEth={10}
       />
     </>
@@ -259,7 +260,7 @@ function SelfAuther() {
             onClick={() => setActiveView(3)}
             className={getButtonClass(3)}
           >
-            Interface 3
+            Buy Ticket
           </button>
         </div>
 

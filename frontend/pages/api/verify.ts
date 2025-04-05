@@ -5,6 +5,7 @@ import {
 } from '@selfxyz/core';
 import { ethers } from 'ethers';
 import { abi } from '../../app/content/abi';
+import { MINTER_CONTRACT_ADDRESS } from "@/lib/address"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
@@ -19,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             console.log("Public signals:", publicSignals);
 
             // Contract details
-            const contractAddress = "0xA09C183B57419654d891Ca7052f2a719b0495421";
+            const contractAddress = MINTER_CONTRACT_ADDRESS;
             const address = await getUserIdentifier(publicSignals, "hex");
             console.log("Extracted address from verification result:", address);
 

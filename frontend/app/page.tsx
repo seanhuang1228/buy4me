@@ -1,68 +1,15 @@
 'use client';
 
+import dynamic from 'next/dynamic'
 import React, { useState, useEffect } from 'react';
-import SelfQRcodeWrapper, { SelfApp, SelfAppBuilder } from '@selfxyz/qrcode';
 import { logo } from './content/birthdayAppLogo';
 import { ethers } from 'ethers';
 
+const SelfQRWrapper = dynamic(() => import('../components/SelfQRCodeWrapper'), {
+  ssr: false
+})
+
 function SelfAuther() {
-    const [input, setInput] = useState('0xE6E4b6a802F2e0aeE5676f6010e0AF5C9CDd0a50');
-    const [address, setAddress] = useState(input);
-
-    const [ensName, setEnsName] = useState<string | null>(null);
-
-    useEffect(() => {
-        if (ethers.isAddress(input)) {
-            setAddress(input);
-        }
-    }, [input]);
-
-    useEffect(() => {
-        const resolveEns = async () => {
-            try {
-                const provider = new ethers.JsonRpcProvider('https://mainnet.infura.io/v3/84842078b09946638c03157f83405213');
-    
-                if (input.toLowerCase().endsWith('.eth')) {
-                    const resolvedAddress = await provider.resolveName(input);
-                    if (resolvedAddress) {
-                        setAddress(resolvedAddress);
-                        setEnsName(input);
-                    }
-                } else if (ethers.isAddress(input)) {
-                    const resolvedName = await provider.lookupAddress(input);
-                    setEnsName(resolvedName);
-                } else {
-                    setEnsName(null);
-                }
-            } catch (error) {
-                console.error('Error resolving ENS:', error);
-                setEnsName(null);
-            }
-        };
-    
-        resolveEns();
-    }, [input]);
-
-
-    const selfApp = new SelfAppBuilder({
-        appName: "Self Birthday",
-        scope: "Self-Denver-Birthday",
-        // endpoint: "https://happy-birthday-rho-nine.vercel.app/api/verify",
-        // run `ngrok http 3000` and copy the url here to test locally
-        endpoint: "https://bfcf-2400-4150-8300-2d00-f83f-9c52-f581-17b9.ngrok-free.app/api/verify",
-        logoBase64: logo,
-        userId: address,
-        userIdType: "hex",
-        disclosures: { 
-            date_of_birth: true,
-        },
-        devMode: true,
-    } as Partial<SelfApp>).build();
-
-    const handleSuccess = async () => {
-        console.log('Verification successful');
-    };
-
     return (
         // TODO: change graph
         <div className="min-h-screen bg-white text-black">
@@ -104,34 +51,7 @@ function SelfAuther() {
                     <h2 className="text-2xl font-semibold mb-6 text-center">
                         Let&apos;s Auth!
                     </h2>
-
-                    <div className="mb-6">
-                        <label className="block text-sm font-medium mb-2">
-                            Enter your wallet address or ENS name:
-                        </label>
-                        <input
-                            type="text"
-                            value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                            placeholder="0x... or name.eth"
-                            className="w-full p-2 border border-gray-300 rounded"
-                        />
-                        {ensName && ensName !== address && (
-                            <p className="mt-2 text-sm text-gray-600">
-                                ✓ Resolved: {ensName}
-                            </p>
-                        )}
-                    </div>
-
-                    {selfApp && (
-                        <div className="flex justify-center mb-6">
-                            <SelfQRcodeWrapper
-                                selfApp={selfApp}
-                                type='websocket'
-                                onSuccess={handleSuccess}
-                            />
-                        </div>
-                    )}
+                    <SelfQRWrapper />
                 </div>
             </div>
         </div>

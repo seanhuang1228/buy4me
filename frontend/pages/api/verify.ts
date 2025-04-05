@@ -19,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             console.log("Public signals:", publicSignals);
 
             // Contract details
-            const contractAddress = "0x881ED38b3ba7EE24eEAD094FA5D6ddD2F56Ba1c0";
+            const contractAddress = "0x1a634743e3Ea7DDE8d31BB6C2CA15987E80079E0";
 
             // Uncomment this to use the Self backend verifier for offchain verification instead
             // const selfdVerifier = new SelfBackendVerifier(
@@ -36,20 +36,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             console.log("Extracted address from verification result:", address);
 
             // Connect to Celo network
-            const provider = new ethers.JsonRpcProvider("https://forno.celo.org");
+            const provider = new ethers.JsonRpcProvider("https://alfajores-forno.celo-testnet.org");
             const signer = new ethers.Wallet(process.env.PRIVATE_KEY!, provider);
             const contract = new ethers.Contract(contractAddress, abi, signer);
 
+            const gasPrice = ethers.parseUnits('30', 'gwei');
+            console.log("SCOPE:", publicSignals[7]);
+            console.log("ATTESTATION_ID:", publicSignals[10]);
+            console.log("NULLIFIER:", publicSignals[17]);
+
             try {
-                const tx = await contract.verifySelfProof({
-                    a: proof.a,
-                    b: [
-                      [proof.b[0][1], proof.b[0][0]],
-                      [proof.b[1][1], proof.b[1][0]],
-                    ],
-                    c: proof.c,
-                    pubSignals: publicSignals,
-                });
+                console.log("sucess try to send!");
+                const tx = await contract.verifySelfProof(
+                    {
+                        a: proof.a,
+                        b: [
+                            [proof.b[0][1], proof.b[0][0]],
+                            [proof.b[1][1], proof.b[1][0]],
+                        ],
+                        c: proof.c,
+                        pubSignals: publicSignals
+                    },
+                    {
+                        gasPrice,
+                        gasLimit: 1000000
+                    }
+                );
                 await tx.wait();
                 console.log("Successfully called verifySelfProof function");
                 res.status(200).json({

@@ -7,8 +7,8 @@ import { ethers } from 'ethers';
 import TicketPurchaseFlow from '@/components/TicketPurchaseFlow'
 
 // --- Contract Details (Replace with your actual details) ---
-const CONTRACT_ADDRESS = '0xd5CAE924a7EeE4d4A7902F7610Ff5acb4533AA9b'; // <-- PASTE YOUR CONTRACT ADDRESS HERE
-const TICKET_ADDRESS = '0x35829336286e25b2CB272C1c708Fb7F1032f9702';
+const CONTRACT_ADDRESS = '0x6d46cBfd116B98e62e86D07b644D310AE082Dd12'; // <-- PASTE YOUR CONTRACT ADDRESS HERE
+const TICKET_ADDRESS = '0x2838e29d085D1b425747Ee212277C9CAc5a043e3';
 const CONTRACT_ABI = [
   'function toggleDelegate(address delegate)',
   'function canActOnBehalf(address owner, address actor) view returns (bool)',

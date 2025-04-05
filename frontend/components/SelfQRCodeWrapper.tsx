@@ -48,7 +48,7 @@ function VerificationPage({ userId }: Props) {
       // run `ngrok http 3000` and copy the url here to test locally
       endpoint: "https://1303-140-112-16-175.ngrok-free.app/api/verify",
       endpointType: "staging_https",
-      userId: "0xdcfb721b8DF1B001A01e1d02C486F4D1c00dbaF5",
+      userId: userId,
       userIdType: "hex",
       disclosures: { 
         date_of_birth: true,

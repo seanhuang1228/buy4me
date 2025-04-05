@@ -19,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             console.log("Public signals:", publicSignals);
 
             // Contract details
-            const contractAddress = "0x0A11C254A9c242e87DDDcf329b9e16104CDb993f";
+            const contractAddress = "0xA09C183B57419654d891Ca7052f2a719b0495421";
             const address = await getUserIdentifier(publicSignals, "hex");
             console.log("Extracted address from verification result:", address);
 

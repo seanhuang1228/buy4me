@@ -49,24 +49,6 @@ const Interface1: React.FC<Interface1Props> = ({ userId, setUserId }) => {
       </div>
     </>
   );
-  // return (
-  //   <>
-  //     <h2 className="text-2xl font-semibold mb-6 text-center">
-  //       Let's Auth!
-  //     </h2>
-  //     <div className="flex flex-col items-center">
-  //       <input
-  //           type="text"
-  //           placeholder="Enter your Celo address"
-  //           value={userId}
-  //           onChange={(e) => setUserId(e.target.value)}
-  //           className="px-3 py-2 border border-gray-300 rounded-md w-full max-w-md mb-5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-  //           aria-label="User ID Input"
-  //       />
-  //       <SelfQRWrapper userId={userId} />
-  //     </div>
-  //   </>
-  // );
 };
 
 
@@ -125,7 +107,7 @@ const Interface2 = () => {
               onClick={connectWallet}
               className="px-6 py-2 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-700 transition"
             >
-              🔌 Connect Wallet
+              Connect Wallet
             </button>
           </div>
         ) : (
@@ -162,36 +144,6 @@ const Interface2 = () => {
       </div>
     </>
   );
-
-  // return (
-  //   <>
-  //     <h2 className="text-2xl font-semibold mb-6 text-center">
-  //       Manage Delegation (View 2)
-  //     </h2>
-  //     <div className="space-y-4">
-  //       {!userAddress ? ( <button onClick={connectWallet} className="...">connect wallet</button> ) : ( <div className="p-3 bg-green-100 ...">{userAddress}</div> )}
-  //     </div>
-  //     <div className="space-y-4 pt-4 border-t border-gray-200">
-  //       {/* Input */}
-  //       <input
-  //         type="text"
-  //         placeholder="Enter Celo Address You Want To Query"
-  //         value={queryAddr}
-  //         onChange={(e) => setQueryAddr(e.target.value)}
-  //         className="px-3 py-2 border border-gray-300 rounded-md w-full mb-5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-  //         aria-label="User ID Input"
-  //       />
-  //       {/* Toggle Button */}
-  //       <button
-  //         onClick={toggleDelegation}
-  //         className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-  //       >
-  //         {/* ... Button text logic ... */}
-  //         {!isValidQuery ? 'Not valid addr' : isDelegated ? 'Set Delegation to: Not Allowed' : 'Set Delegation to: Allowed'}
-  //       </button>
-  //     </div>
-  //   </>
-  // );
 };
 
 // --- Interface 3 (Placeholder - Unchanged) ---
@@ -209,18 +161,6 @@ const Interface3 = () => {
       />
     </>
   );
-  // return (
-  //   <>
-  //     <h2 className="text-2xl font-semibold mb-6 text-center">
-  //       Buy Tickets
-  //     </h2>
-  //     <TicketPurchaseFlow
-  //       passAddress={CONTRACT_ADDRESS}
-  //       ticketAddress={TICKET_ADDRESS}
-  //       ticketPriceEth={10}
-  //     />
-  //   </>
-  // );
 };
 
 // --- Main SelfAuther Component (Integrates Interfaces) ---

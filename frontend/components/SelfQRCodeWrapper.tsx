@@ -14,18 +14,6 @@ function VerificationPage({ userId }: Props) {
   const [isClient, setIsClient] = useState(false);
   const [isAddr, setIsAddr] = useState(false);
 
-  const fetchProofFromServer = async () => {
-    console.log("goooooooooooood");
-    const res = await fetch(`/api/zk-proof?userId=${userId}`)
-    if (!res.ok) return alert('failed QQ')
-    const { proof, publicSignals } = await res.json()
-    console.log("proof: ", proof);
-    console.log("publicSignals: ", publicSignals);
-    // setProof(proof)
-    // setPublicSignals(publicSignals)
-    // setReadyToMint(true)
-  };
-
   useEffect(() => {
     setIsClient(true);
   }, [])
@@ -44,8 +32,6 @@ function VerificationPage({ userId }: Props) {
     const selfApp = new SelfAppBuilder({
       appName: "Self Birthday",
       scope: "self-auth",
-      // endpoint: "https://happy-birthday-rho-nine.vercel.app/api/verify",
-      // run `ngrok http 3000` and copy the url here to test locally
       endpoint: "https://1303-140-112-16-175.ngrok-free.app/api/verify",
       endpointType: "staging_https",
       userId: userId,

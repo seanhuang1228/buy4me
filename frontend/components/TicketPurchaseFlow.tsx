@@ -66,10 +66,10 @@ export default function TicketPurchaseSection({ passAddress, ticketAddress, tick
 
       setTxHash(tx.hash)
       await tx.wait()
-      alert('🎉 購票成功！NFT 已鑄造！')
+      alert("Success! You got a ticket NFT!")
     } catch (err: any) {
       console.error(err)
-      setError(err.message || '購票失敗')
+      setError(err.message || 'Buy ticket failed')
     } finally {
       setBuying(false)
     }
@@ -80,12 +80,9 @@ export default function TicketPurchaseSection({ passAddress, ticketAddress, tick
     try {
       const addr = tokenIdInput
 
-      // const provider = new ethers.BrowserProvider(window.ethereum)
       const provider = new ethers.JsonRpcProvider("https://alfajores-forno.celo-testnet.org");
       const contract = new ethers.Contract(passAddress, passAbi, provider)
       const canAct = await contract.canActOnBehalf(addr, account)
-      // const addrIsPass = await contract
-      // const balance = await contract.balanceOf(account)
       const id = await contract.address2id(addr)
 
       if (canAct) {
@@ -97,7 +94,7 @@ export default function TicketPurchaseSection({ passAddress, ticketAddress, tick
       }
     } catch(err: any) {
       console.error(err)
-      alert('請輸入有效的 tokenId')
+      alert('Please input a valid address which you are delegated')
     }
   }
 
@@ -186,64 +183,4 @@ export default function TicketPurchaseSection({ passAddress, ticketAddress, tick
       )}
     </div>
   );
-
-  // return (
-  //   <div style={{ textAlign: 'center', marginTop: 40 }}>
-  //     {!connected ? (
-  //       <>
-  //         <div style={{ display: 'flex', justifyContent: 'center', margin: '1rem 0' }}>
-  //         <button
-  //           onClick={connect}
-  //           className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
-  //         >
-  //           Connect Wallet
-  //         </button>
-  //         </div>
-  //       </>
-  //     ) : !hasPass ? (
-  //       <p>⚠️ 您尚未通過驗證（沒有資格 NFT）</p>
-  //     ) : (
-  //       <>
-  //         <p>✅ 已確認你具備購票資格</p>
-  //
-  //         <p>🧑‍🤝‍🧑 若要幫其他人購票，請輸入他們的資格 NFT ID：</p>
-  //         <div style={{ marginBottom: 12 }}>
-  //           <input
-  //             value={tokenIdInput}
-  //             onChange={e => setTokenIdInput(e.target.value)}
-  //             placeholder="輸入資格 NFT ID"
-  //             style={{ padding: 8, width: 240 }}
-  //           />
-  //           <button onClick={handleAddId} style={{ marginLeft: 8 }}>➕ 加入</button>
-  //         </div>
-  //
-  //         {delegateIds.length > 0 && (
-  //           <ul style={{ fontSize: 14, marginBottom: 16 }}>
-  //             {delegateIds.map((id, idx) => (
-  //               <li key={idx}>
-  //                 🎟️ Token ID: {id.toString()} &nbsp;
-  //                 <button onClick={() => handleRemoveId(idx)}>❌ 移除</button>
-  //               </li>
-  //             ))}
-  //           </ul>
-  //         )}
-  //
-  //         <p>🧾 總票數：{delegateIds.length} 張</p>
-  //         <p>💰 總金額(gwei)：{(ticketPriceEth * delegateIds.length).toFixed(2)} CELO</p>
-  //
-  //         <button onClick={handleBuy} disabled={buying}>
-  //           {buying ? '處理中...' : '立即購票'}
-  //         </button>
-  //       </>
-  //     )}
-  //
-  //     {txHash && (
-  //       <p style={{ marginTop: 10 }}>
-  //         ✅ <a href={`https://explorer.celo.org/alfajores/tx/${txHash}`} target="_blank">查看交易</a>
-  //       </p>
-  //     )}
-  //
-  //     {error && <p style={{ color: 'red' }}>⚠️ {error}</p>}
-  //   </div>
-  // )
 }

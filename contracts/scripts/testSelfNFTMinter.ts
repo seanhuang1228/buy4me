@@ -3,7 +3,7 @@ import { expect } from "chai";
 
 async function main() {
   // Address of the deployed SelfNFTMinter contract (replace with your actual deployed address)
-  const deployedAddress = "0x0A11C254A9c242e87DDDcf329b9e16104CDb993f";
+  const deployedAddress = "0x48be85e8Ff7b851c1994F4bd98e23aA305511496";
 
   // ABI of the deployed contract (only including the selfNFT variable)
   const getSelfNFTAddressABI = [

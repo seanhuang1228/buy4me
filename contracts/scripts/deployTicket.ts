@@ -18,7 +18,7 @@ async function main() {
 
   const ticketPrice = 10;
   const maxTicketAmountCanBuy = 4;
-  const selfNFT = "0xd5CAE924a7EeE4d4A7902F7610Ff5acb4533AA9b";
+  const selfNFT = "0x64661693E54F8B3CE0E548D4fe4FBEc3025d1236";
 
   console.log("Deploying Ticket...");
   const ticket = await Ticket.deploy(

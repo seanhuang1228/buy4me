@@ -14,6 +14,18 @@ function VerificationPage({ userId }: Props) {
   const [isClient, setIsClient] = useState(false);
   const [isAddr, setIsAddr] = useState(false);
 
+  const fetchProofFromServer = async () => {
+    console.log("goooooooooooood");
+    const res = await fetch(`/api/zk-proof?userId=${userId}`)
+    if (!res.ok) return alert('failed QQ')
+    const { proof, publicSignals } = await res.json()
+    console.log("proof: ", proof);
+    console.log("publicSignals: ", publicSignals);
+    // setProof(proof)
+    // setPublicSignals(publicSignals)
+    // setReadyToMint(true)
+  };
+
   useEffect(() => {
     setIsClient(true);
   }, [])
@@ -47,19 +59,15 @@ function VerificationPage({ userId }: Props) {
     return (
       <div className="verification-container">
         <h1>Verify Your Identity</h1>
+        <button onClick={() => {
+          console.log('✅ 模擬 onSuccess')
+          fetchProofFromServer()
+        }}>手動觸發</button>
         <p>Scan this QR code with the Self app to verify your identity</p>
         <SelfQRcodeWrapper
           selfApp={selfApp}
-          onSuccess={() => {
-            // Handle successful verification
-            console.log("Verification successful!");
-            // Redirect or update UI
-          }}
-          size={350}
+          onSuccess={fetchProofFromServer}
         />
-        <p className="text-sm text-gray-500">
-          User ID: {userId.substring(0, 8)}...
-        </p>
       </div>
     );
   } else {

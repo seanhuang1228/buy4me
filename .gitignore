@@ -1,17 +1,41 @@
-# 忽略 node_modules 目錄
-node_modules/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# 忽略 Next.js 的建置檔案
+# dependencies
+node_modules
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+coverage
+
+# next.js
 .next/
+out/
 
-# 忽略環境變數檔案
-.env*
-!.env.example
+# production
+build
 
-# 忽略 log 檔案
-logs/
-*.log
-
-# 忽略系統檔案
+# misc
 .DS_Store
-Thumbs.db
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

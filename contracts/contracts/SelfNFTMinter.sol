@@ -22,6 +22,7 @@ contract SelfNFTMinter is SelfVerificationRoot, Ownable {
     event SelfNFTClaimed(address indexed claimer, uint256 id);
 
     error RegisteredNullifier();
+    error NoReason();
 
     constructor(
         address _identityVerificationHub, 

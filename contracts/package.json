@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "build": "npx hardhat compile",
-    "deploy": "npx hardhat run scripts/deploySelfNFTMinter.ts --network celo"
+    "deploy:selfNFTMinter": "npx hardhat run scripts/deploySelfNFTMinter.ts --network celo",
+    "deploy:Ticket": "npx hardhat run scripts/deployTicket.ts --network celo",
+    "test": "npx hardhat run scripts/testSelfNFTMinter.ts --network celo"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",

@@ -1,0 +1,17 @@
+# 忽略 node_modules 目錄
+node_modules/
+
+# 忽略 Next.js 的建置檔案
+.next/
+
+# 忽略環境變數檔案
+.env*
+!.env.example
+
+# 忽略 log 檔案
+logs/
+*.log
+
+# 忽略系統檔案
+.DS_Store
+Thumbs.db

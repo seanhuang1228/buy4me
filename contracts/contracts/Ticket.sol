@@ -23,12 +23,14 @@ contract TicketSeller is ERC721, Ownable {
         require(msg.value >= totalPrice, "Insufficient payment");
         require(delegate_ids.length <= maxTicketAmountCanBuy - 1, "It is not allowed to buy so much ticket");
         require(selfNFT.balanceOf(msg.sender) > 0, "You must own a SelfNFT to buy a ticket");
+        require(balanceOf(msg.sender) == 0, "You already own a ticket");
 
         // Check each delegate_id for the canActOnBehalf condition
         for (uint256 i = 0; i < delegate_ids.length; i++) {
             uint256 delegateId = delegate_ids[i];
             address selfNFTOwner = selfNFT.ownerOf(delegateId);
             require(selfNFT.canActOnBehalf(selfNFTOwner, msg.sender), "Delegate cannot act on your behalf");
+            require(balanceOf(selfNFTOwner) == 0, "Your delegator already own a ticket");
         }
 
         // Increment the tokenId to ensure unique tickets

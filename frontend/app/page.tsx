@@ -252,34 +252,48 @@ function SelfAuther() {
 
   return (
     <div className="min-h-screen bg-gray-50 text-black">
-      {/* --- Navigation Bar (Unchanged) --- */}
-      <nav className="w-full bg-white border-b border-gray-200 py-3 px-6 flex items-center justify-between sticky top-0 z-10">
-        {/* ... (nav content unchanged) ... */}
-         <div className="flex items-center">
-          <div className="mr-8">
-            <img src="/self.svg" alt="Self Logo" className="h-8" />
-          </div>
+      {/* --- Navigation Bar --- */}
+      <nav className="w-full bg-white shadow-sm border-b border-gray-200 py-3 px-6 flex items-center justify-between sticky top-0 z-10">
+        {/* Left logo */}
+        <div className="flex items-center">
+          <img src="/self.svg" alt="Self Logo" className="h-8 mr-3" />
+          <span className="text-lg font-semibold text-indigo-700 hidden sm:inline">Buy4Me</span>
         </div>
+
+        {/* Right links */}
         <div className="flex items-center space-x-4">
+          {/* Star on GitHub button */}
           <a
             href="https://github.com/seanhuang1228/buy4me"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-gray-900 text-white px-4 py-2 rounded-md flex items-center hover:bg-gray-800 transition-colors text-sm"
+            className="bg-indigo-600 text-white px-4 py-2 rounded-md flex items-center hover:bg-indigo-700 transition text-sm shadow-sm"
           >
-            <span className="mr-2 hidden sm:inline">Star on Github</span> {/* Hide text on small screens */}
-             <span className="mr-2 sm:hidden">Star</span> {/* Show shorter text */}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <span className="mr-2 hidden sm:inline">Star on GitHub</span>
+            <span className="sm:hidden mr-2">Star</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
             </svg>
           </a>
+
+          {/* Text link */}
           <a
-            className="hidden sm:flex items-center justify-center gap-1 text-sm text-gray-600 hover:text-indigo-600 hover:underline hover:underline-offset-4" // Hide on small screens
             href="https://github.com/seanhuang1228/buy4me"
             target="_blank"
             rel="noopener noreferrer"
+            className="hidden sm:inline text-sm text-gray-600 hover:text-indigo-600 hover:underline hover:underline-offset-4 transition"
           >
-            Go to our github →
+            Go to our GitHub →
           </a>
         </div>
       </nav>

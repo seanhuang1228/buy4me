@@ -30,16 +30,15 @@ function VerificationPage({ userId }: Props) {
 
   if (isAddr) {
     const selfApp = new SelfAppBuilder({
-      appName: "Self Birthday",
+      appName: "Buy4Me",
       scope: "self-auth",
       endpoint: "https://1303-140-112-16-175.ngrok-free.app/api/verify",
-      endpointType: "staging_https",
+      endpointType: "https",
       userId: userId,
       userIdType: "hex",
       disclosures: { 
         date_of_birth: true,
       },
-      devMode: true,
     } as Partial<SelfApp>).build();
 
     return (

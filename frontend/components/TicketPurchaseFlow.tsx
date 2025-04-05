@@ -80,7 +80,7 @@ export default function TicketPurchaseSection({ passAddress, ticketAddress, tick
     try {
       const addr = tokenIdInput.trim()
 
-      const provider = new ethers.JsonRpcProvider("https://alfajores-forno.celo-testnet.org");
+      const provider = new ethers.JsonRpcProvider("https://forno.celo.org");
       const contract = new ethers.Contract(passAddress, passAbi, provider)
       const canAct = await contract.canActOnBehalf(addr, account)
       const id = await contract.address2id(addr)

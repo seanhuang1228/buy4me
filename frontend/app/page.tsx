@@ -10,6 +10,8 @@ const SelfQRWrapper = dynamic(() => import('../components/SelfQRCodeWrapper'), {
 })
 
 function SelfAuther() {
+    const [userId, setUserId] = useState('')
+
     return (
         // TODO: change graph
         <div className="min-h-screen bg-white text-black">
@@ -51,7 +53,13 @@ function SelfAuther() {
                     <h2 className="text-2xl font-semibold mb-6 text-center">
                         Let&apos;s Auth!
                     </h2>
-                    <SelfQRWrapper />
+                    <input
+                        placeholder="enter your celo address"
+                        value={userId}
+                        onChange={(e) => setUserId(e.target.value)}
+                        style={{ padding: '8px', width: '300px', marginBottom: '20px' }}
+                    />
+                    <SelfQRWrapper userId={userId}/>
                 </div>
             </div>
         </div>

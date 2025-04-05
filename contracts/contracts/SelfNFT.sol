@@ -62,6 +62,9 @@ contract SelfNFT is ERC721, Ownable {
 
     // Check if A is allowed to act for B
     function canActOnBehalf(address owner, address actor) external view returns (bool) {
+        if (owner == actor) {
+            return true
+        }
         return delegationMap[owner][actor];
     }
 }

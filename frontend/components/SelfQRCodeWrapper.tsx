@@ -59,14 +59,10 @@ function VerificationPage({ userId }: Props) {
     return (
       <div className="verification-container">
         <h1>Verify Your Identity</h1>
-        <button onClick={() => {
-          console.log('✅ 模擬 onSuccess')
-          fetchProofFromServer()
-        }}>手動觸發</button>
         <p>Scan this QR code with the Self app to verify your identity</p>
         <SelfQRcodeWrapper
           selfApp={selfApp}
-          onSuccess={fetchProofFromServer}
+          onSuccess={() => {}}
         />
       </div>
     );

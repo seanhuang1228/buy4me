@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import React, { useState, useEffect, useCallback } from 'react';
 // Make sure ethers is imported and available
 import { ethers } from 'ethers';
+import TicketPurchaseFlow from '@/components/TicketPurchaseFlow'
 
 // --- Contract Details (Replace with your actual details) ---
 const CONTRACT_ADDRESS = '0xd5CAE924a7EeE4d4A7902F7610Ff5acb4533AA9b'; // <-- PASTE YOUR CONTRACT ADDRESS HERE

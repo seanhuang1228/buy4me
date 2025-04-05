@@ -1,10 +1,15 @@
 # Buy4me
 
-This is a decentralized application built with the Self protocol. To get started, you scan your passport and claim your identity by minting an NFT. Once that’s done, you can buy a ticket. Since each verified identity can only be used to purchase one ticket, the system ensures a fairer distribution.
+This decentralized application is built on the Self protocol, enabling users to verify their identity by scanning a passport and minting a SelfNFT. This NFT represents a unique identity and is strictly non-transferable—functions like `transfer` and `approve` are disabled to protect identity integrity.
 
-If you want to buy tickets for friends or family, they can delegate their identity to you. You can be delegated by multiple people and purchase tickets on their behalf. Note that delegation does not transfer the identity NFT itself—it only grants permission to buy the ticket. The ticket will be owned by the person whose identity was used, not the buyer.
+Instead of transferring identity, the protocol supports on-chain identity delegation. After claiming a SelfNFT, a user can delegate their identity to another wallet, which is recorded on-chain. This allows the delegate to act on the user’s behalf for specific transactions—without compromising ownership.
 
-This makes ticket purchasing both fair and convenient!
+One example use case is ticket purchasing. When a user wants to buy tickets, they can pass in an array of SelfNFT IDs that have delegated to them. The contract verifies that:
+
+1. Each delegator (including the buyer, if applicable) hasn’t already received a ticket.
+2. Each listed identity has properly delegated authority to the buyer.
+
+Once validated, the buyer pays for the tickets, and the contract automatically distributes each ticket to the corresponding delegator—ensuring fairness, flexibility, and on-chain accountability.
 
 ## Setup Instructions
 

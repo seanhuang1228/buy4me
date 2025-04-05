@@ -10,6 +10,7 @@ contract TicketSeller is ERC721, Ownable {
     uint256 public ticketPrice;  // Price of one ticket in Celo
     uint256 public maxTicketAmountCanBuy;  // The maximum amount of ticket an user can buy
     ISelfNFT public selfNFT;  // SelfNFT contract reference
+    mapping(address => uint256) public address2id;
 
     constructor(uint256 _ticketPrice, uint256 _maxTicketAmountCanBuy, address _selfNFT) ERC721("EventTicket", "ETKT") Ownable(msg.sender){
         ticketPrice = _ticketPrice;  // Set the ticket price on deployment
@@ -19,11 +20,9 @@ contract TicketSeller is ERC721, Ownable {
 
     // Mint a ticket when paying the required amount
     function buyTicket(uint256[] calldata delegate_ids) external payable {
-        uint256 totalPrice = ticketPrice * (1 + delegate_ids.length);
+        uint256 totalPrice = ticketPrice * (delegate_ids.length);
         require(msg.value >= totalPrice, "Insufficient payment");
-        require(delegate_ids.length <= maxTicketAmountCanBuy - 1, "It is not allowed to buy so much ticket");
-        require(selfNFT.balanceOf(msg.sender) > 0, "You must own a SelfNFT to buy a ticket");
-        require(balanceOf(msg.sender) == 0, "You already own a ticket");
+        require(delegate_ids.length <= maxTicketAmountCanBuy, "It is not allowed to buy so much ticket");
 
         // Check each delegate_id for the canActOnBehalf condition
         for (uint256 i = 0; i < delegate_ids.length; i++) {
@@ -33,18 +32,20 @@ contract TicketSeller is ERC721, Ownable {
             require(balanceOf(selfNFTOwner) == 0, "Your delegator already own a ticket");
         }
 
-        // Increment the tokenId to ensure unique tickets
-        _tokenIds++;
+        // Check there is no duplicate delegate id in the array
+        for (uint256 i = 0; i < delegate_ids.length; i++) {
+            for (uint256 j = i + 1; j < delegate_ids.length; j++) {
+                require(i != j, "There are duplicate delegator in your delegate_ids");
+            }
+        }
 
-        // Mint the NFT (ticket) for the buyer
-        _mint(msg.sender, _tokenIds);
-        
         // Buy ticket for your friends
         for (uint256 i = 0; i < delegate_ids.length; i++) {
             uint256 delegateId = delegate_ids[i];
             address selfNFTOwner = selfNFT.ownerOf(delegateId);
             _tokenIds++;
             _mint(selfNFTOwner, _tokenIds);
+            address2id[selfNFTOwner] = _tokenIds;
         }
 
         // Refund any excess payment if the user sends more than required

@@ -2,8 +2,8 @@ import { ethers } from "hardhat";
 import { expect } from "chai";
 
 async function main() {
-  // Address of the deployed TicketSeller contract (replace with your actual deployed address)
-  const deployedAddress = "0xD266ad7Cf3224204A2daA7E2c06aB435c76A7362";
+  // Address of the deployed SelfNFTMinter contract (replace with your actual deployed address)
+  const deployedAddress = "0x0A11C254A9c242e87DDDcf329b9e16104CDb993f";
 
   // ABI of the deployed contract (only including the selfNFT variable)
   const getSelfNFTAddressABI = [

@@ -9,6 +9,7 @@ contract SelfNFT is ERC721, Ownable {
 
     // delegationMap[B][A] = true means A can act for B
     mapping(address => mapping(address => bool)) public delegationMap;
+    mapping(address => uint256) public address2id;
 
     constructor() ERC721("SelfNFT", "SNFT") Ownable(msg.sender) {}
 
@@ -16,6 +17,7 @@ contract SelfNFT is ERC721, Ownable {
     function mint(address to) external onlyOwner returns (uint256) {
         _tokenIds++;
         _mint(to, _tokenIds);
+        address2id[to] = _tokenIds;
         return _tokenIds;
     }
 
@@ -53,8 +55,9 @@ contract SelfNFT is ERC721, Ownable {
     }
 
     // Set delegation permission
-    function setDelegate(address delegate, bool allowed) external {
-        delegationMap[msg.sender][delegate] = allowed;
+    function toggleDelegate(address delegate) external {
+        bool newStatus = !delegationMap[msg.sender][delegate];
+        delegationMap[msg.sender][delegate] = newStatus;
     }
 
     // Check if A is allowed to act for B

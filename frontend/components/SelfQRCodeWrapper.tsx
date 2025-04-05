@@ -57,9 +57,13 @@ function VerificationPage({ userId }: Props) {
     } as Partial<SelfApp>).build();
 
     return (
-      <div className="verification-container">
-        <h1>Verify Your Identity</h1>
-        <p>Scan this QR code with the Self app to verify your identity</p>
+      <div className="max-w-md mx-auto bg-white rounded-xl p-6 text-center space-y-4">
+        <h2 className="text-xl font-semibold text-indigo-700">
+          Verify Your Identity
+        </h2>
+        <p className="text-sm text-gray-600">
+          Scan this QR code with the Self app to verify your identity
+        </p>
         <SelfQRcodeWrapper
           selfApp={selfApp}
           onSuccess={() => {}}
@@ -68,7 +72,11 @@ function VerificationPage({ userId }: Props) {
     );
   } else {
     return (
-      <p> not a valid address... </p>
+      <div className="max-w-md mx-auto bg-white rounded-xl p-6 text-center space-y-4">
+        <p className="text-red-600 text-lg mt-2">
+          ⚠️ Not a valid address...
+        </p>
+      </div>
     );
   }
 }

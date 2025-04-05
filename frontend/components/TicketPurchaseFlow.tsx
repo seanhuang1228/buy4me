@@ -106,7 +106,7 @@ export default function TicketPurchaseSection({ passAddress, ticketAddress, tick
   }
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded-xl text-center space-y-4">
+    <div className="flex flex-col items-center space-y-6">
 
       {!connected ? (
         <div className="h-64 flex flex-col justify-center items-center">
